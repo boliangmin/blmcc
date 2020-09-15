@@ -71,11 +71,5 @@
 ..\obj\main.o: ..\include\sdk\stm32f4xx_ll_usb.h
 ..\obj\main.o: ..\include\sdk\stm32f4xx_hal_pcd_ex.h
 ..\obj\main.o: ..\include\sdk\stm32f4xx_hal_hcd.h
+..\obj\main.o: ..\include\drive\configure.h
 ..\obj\main.o: ..\include\drive\delay.h
-..\obj\main.o: ..\include\drive\usart.h
-..\obj\main.o: ..\include\drive\led.h
-..\obj\main.o: ..\include\drive\key.h
-..\obj\main.o: ..\include\drive\lcd.h
-..\obj\main.o: D:\Program Files\keil\ARM\ARMCC\Bin\..\include\stdlib.h
-..\obj\main.o: ..\include\drive\sdram.h
-..\obj\main.o: ..\include\drive\can.h

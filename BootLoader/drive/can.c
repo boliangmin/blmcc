@@ -2,24 +2,14 @@
 #include "usart.h"
 #include "delay.h"
 #include "led.h"
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK STM32F429开发板
-//CAN驱动代码	   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//创建日期:2015/12/29
-//版本：V1.0
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2014-2024
-//All rights reserved									////////////////////////////////////////////////
-  
-////////////////  //////////////////
+
+
 CAN_HandleTypeDef   CAN1_Handler;   //CAN1句柄
 CanTxMsgTypeDef     TxMessage;      //发送消息
 CanRxMsgTypeDef     RxMessage;      //接收消息
 
-////CAN初始化
+
+//CAN初始化
 //tsjw:重新同步跳跃时间单元.范围:CAN_SJW_1TQ~CAN_SJW_4TQ
 //tbs2:时间段2的时间单元.   范围:CAN_BS2_1TQ~CAN_BS2_8TQ;
 //tbs1:时间段1的时间单元.   范围:CAN_BS1_1TQ~CAN_BS1_16TQ
@@ -29,7 +19,7 @@ CanRxMsgTypeDef     RxMessage;      //接收消息
 //Fpclk1的时钟在初始化的时候设置为45M,如果设置CAN1_Mode_Init(CAN_SJW_1tq,CAN_BS2_6tq,CAN_BS1_8tq,6,CAN_MODE_LOOPBACK);
 //则波特率为:45M/((6+8+1)*6)=500Kbps
 //返回值:0,初始化OK;
-//    其他,初始化失败; 
+//其他,初始化失败; 
 
 u8 CAN1_Mode_Init(u32 tsjw,u32 tbs2,u32 tbs1,u16 brp,u32 mode)
 {
@@ -93,8 +83,10 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan)
 #endif	
 }
 
-#if CAN1_RX0_INT_ENABLE                         //使能RX0中断
+
 //CAN中断服务函数
+#if CAN1_RX0_INT_ENABLE                         //使能RX0中断
+
 void CAN1_RX0_IRQHandler(void)
 {
     HAL_CAN_IRQHandler(&CAN1_Handler);//此函数会调用CAN_Receive_IT()接收数据
@@ -121,7 +113,7 @@ void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan)
 //len:数据长度(最大为8)				     
 //msg:数据指针,最大为8个字节.
 //返回值:0,成功;
-//		 其他,失败;
+//其他,失败;
 u8 CAN1_Send_Msg(u8* msg,u8 len)
 {	
     u16 i=0;
@@ -131,15 +123,16 @@ u8 CAN1_Send_Msg(u8* msg,u8 len)
     CAN1_Handler.pTxMsg->RTR=CAN_RTR_DATA;  //数据帧
     CAN1_Handler.pTxMsg->DLC=len;                
     for(i=0;i<len;i++)
-    CAN1_Handler.pTxMsg->Data[i]=msg[i];
-    if(HAL_CAN_Transmit(&CAN1_Handler,10)!=HAL_OK) return 1;     //发送
+        CAN1_Handler.pTxMsg->Data[i]=msg[i];
+    if(HAL_CAN_Transmit(&CAN1_Handler,10)!=HAL_OK)
+			  return 1;     //发送
     return 0;		
 }
 
 //can口接收数据查询
 //buf:数据缓存区;	 
 //返回值:0,无数据被收到;
-//		 其他,接收的数据长度;
+//其他,接收的数据长度;
 u8 CAN1_Receive_Msg(u8 *buf)
 {		   		   
  	u32 i;
