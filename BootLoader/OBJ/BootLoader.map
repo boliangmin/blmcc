@@ -970,8 +970,8 @@ Removing Unused input sections from the image.
     Removing stm32f4xx_hal_can.o(i.HAL_CAN_Receive_IT), (132 bytes).
     Removing stm32f4xx_hal_can.o(i.HAL_CAN_RxCpltCallback), (2 bytes).
     Removing stm32f4xx_hal_can.o(i.HAL_CAN_Sleep), (118 bytes).
-    Removing stm32f4xx_hal_can.o(i.HAL_CAN_Transmit), (372 bytes).
-    Removing stm32f4xx_hal_can.o(i.HAL_CAN_Transmit_IT), (316 bytes).
+    Removing stm32f4xx_hal_can.o(i.HAL_CAN_Transmit), (384 bytes).
+    Removing stm32f4xx_hal_can.o(i.HAL_CAN_Transmit_IT), (324 bytes).
     Removing stm32f4xx_hal_can.o(i.HAL_CAN_TxCpltCallback), (2 bytes).
     Removing stm32f4xx_hal_can.o(i.HAL_CAN_WakeUp), (106 bytes).
     Removing stm32f4xx_hal_cortex.o(.rev16_text), (4 bytes).
@@ -1474,7 +1474,7 @@ Removing Unused input sections from the image.
     Removing configure.o(.rrx_text), (6 bytes).
     Removing configure.o(i.CanInit), (26 bytes).
 
-666 unused section(s) (total 70428 bytes) removed from the image.
+666 unused section(s) (total 70448 bytes) removed from the image.
 
 ==============================================================================
 
