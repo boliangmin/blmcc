@@ -1,4 +1,7 @@
 --cpu Cortex-M4.fp
+"..\obj\main.o"
+"..\obj\startup_stm32f429xx.o"
+"..\obj\configure.o"
 "..\obj\can.o"
 "..\obj\delay.o"
 "..\obj\key.o"
@@ -34,9 +37,6 @@
 "..\obj\stm32f4xx_hal_usart.o"
 "..\obj\stm32f4xx_it.o"
 "..\obj\system_stm32f4xx.o"
-"..\obj\main.o"
-"..\obj\startup_stm32f429xx.o"
-"..\obj\configure.o"
 --strict --scatter "..\OBJ\BootLoader.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

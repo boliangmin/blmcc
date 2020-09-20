@@ -3,7 +3,7 @@
 #include "sys.h"
 
 
-void CanInit(void);
+//void CanInit(void);
 
 void BoardInit(void);
 

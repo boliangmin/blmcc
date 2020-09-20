@@ -73,3 +73,4 @@
 ..\obj\main.o: ..\include\sdk\stm32f4xx_hal_hcd.h
 ..\obj\main.o: ..\include\drive\configure.h
 ..\obj\main.o: ..\include\drive\delay.h
+..\obj\main.o: ..\include\drive\can.h
