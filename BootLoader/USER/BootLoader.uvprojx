@@ -332,7 +332,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\include\drive;..\include\sdk</IncludePath>
+              <IncludePath>..\include\drive;..\include\sdk;..\include\cinfigure</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -389,6 +389,11 @@
               <FileName>configure.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\configure\configure.c</FilePath>
+            </File>
+            <File>
+              <FileName>eeprom.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\configure\eeprom.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -935,6 +940,11 @@
               <FileType>5</FileType>
               <FilePath>..\include\sdk\system_stm32f4xx.h</FilePath>
             </File>
+            <File>
+              <FileName>eeprom.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\include\cinfigure\eeprom.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1054,6 +1064,16 @@
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SDK\system_stm32f4xx.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SDK\stm32f4xx_hal_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_i2c_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SDK\stm32f4xx_hal_i2c_ex.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -74,3 +74,5 @@
 ..\obj\main.o: ..\include\drive\configure.h
 ..\obj\main.o: ..\include\drive\delay.h
 ..\obj\main.o: ..\include\drive\can.h
+..\obj\main.o: ..\include\cinfigure\eeprom.h
+..\obj\main.o: ..\include\drive\myiic.h
