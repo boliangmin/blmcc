@@ -12,7 +12,7 @@
 void BoardInit()
 {
 	  HAL_Init();                     //初始化HAL库   
-    Stm32_Clock_Init(360,25,2,7);   //设置时钟,180Mhz
+    Stm32_Clock_Init(360,25,2,7);   //设置时钟,25 / 25 * 360 / 2 = 180Mhz
     delay_init(180);                //初始化延时函数
     uart_init(115200);              //初始化USART
 }

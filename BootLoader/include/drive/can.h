@@ -14,8 +14,8 @@ extern CAN_HandleTypeDef Can_Handle;
 #define CAN_TX_PIN                 GPIO_PIN_12
 #define CAN_TX_GPIO_PORT           GPIOA
 #define CAN_RX_GPIO_PORT           GPIOA
-#define CAN_TX_GPIO_CLK_ENABLE()   __GPIOB_CLK_ENABLE()
-#define CAN_RX_GPIO_CLK_ENABLE()   __GPIOB_CLK_ENABLE()
+#define CAN_TX_GPIO_CLK_ENABLE()   __GPIOA_CLK_ENABLE()
+#define CAN_RX_GPIO_CLK_ENABLE()   __GPIOA_CLK_ENABLE()
 #define CAN_AF_PORT                GPIO_AF9_CAN1 
 
 
@@ -28,6 +28,4 @@ void CAN_Config(void);
 void CAN_SetMsg(void);
 void Init_RxMes(void);
 
-//u8 CAN1_Send_Msg(u8* msg,u8 len);						//发送数据
-//8 CAN1_Receive_Msg(u8 *buf);							//接收数据
 #endif

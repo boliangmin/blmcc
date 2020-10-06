@@ -19,53 +19,65 @@ int main(void)
 //	  }
 	
 	
-//	  //CAN通信测试
-//	  u16 i = 0;
-//	  BoardInit();
-//	  CAN_Config();
-//	  printf("\r\n CAN test demo ,start!r\n");
-//	  printf("\r\n CAN test demo ,start!r\n");
-//	  while(1)
-//		{
-//			  printf("\r\n test %d :  \r\n",++i);
-//			  CAN_SetMsg();
-//			  HAL_CAN_Transmit_IT(&Can_Handle);
-//			  delay_ms(1000);
-//			  printf("\r\n已使用CAN发送数据包！\r\n");
-//		}
-		
-		//EEPROM读写测试
-		#define SIZE sizeof(TEXT_Buffer)
-		const u8 TEXT_Buffer[]={"blmcc eeprom test"};
-		u16 i;
-		u8 datatemp[SIZE];
-		
+	  //CAN通信测试
+	  u16 i = 0;
+	  u16 res;
 	  BoardInit();
-		AT24CXX_Init();
-		
-		while(AT24CXX_Check())    //检测不到24c02
-	  {
-		    delay_ms(500);
-		    printf("can't find 24c02,Please Check!      ");
-		    delay_ms(500);
-	  }
-		
-		while(1)
-	  {
-
-			printf("write start!\r\n");
-			AT24CXX_Write(0,(u8*)TEXT_Buffer,SIZE);
-			printf("write finish\r\n\r\n");
-			
-			printf("read start!\r\n");
-			AT24CXX_Read(0,datatemp,SIZE);
-			printf("read finish!\r\n\r\n");
-			
-			for(i=0;i<30;i++)
-			{
-				printf("%c",datatemp[i]);
-			}
-			printf("\r\n---------------------\r\n");
+	  CAN_Config();
+	  printf("CAN test demo ,start!\r\n");
+	  while(1)
+		{
+			  printf("test %d :  \r\n",++i);
+			  CAN_SetMsg();
+			  res = HAL_CAN_Transmit_IT(&Can_Handle);
+			  printf("send result: %d \r\n",res);
+			  delay_ms(1000);
+			  printf("已使用CAN发送数据包！\r\n\r\n");
+				if(flag==1)
+		    {
+    	      printf("\r\nCAN接收到数据：\r\n");
+					  for(i=0;i<8;i++)
+					  {
+							  printf("%c",Can_Handle.pRxMsg->Data[i]);
+					  }
+						printf("\r\n\r\n");
+			      flag=0;
+			      HAL_Delay(100);
+		    }
 		}
+
+//		//EEPROM读写测试
+//		#define SIZE sizeof(TEXT_Buffer)
+//		const u8 TEXT_Buffer[]={"blmcc eeprom test"};
+//		u16 i;
+//		u8 datatemp[SIZE];
+//		
+//	  BoardInit();
+//		AT24CXX_Init();
+//		
+//		while(AT24CXX_Check())    //检测不到24c02
+//	  {
+//		    delay_ms(500);
+//		    printf("can't find 24c02,Please Check!      ");
+//		    delay_ms(500);
+//	  }
+//		
+//		while(1)
+//	  {
+
+//			printf("write start!\r\n");
+//			AT24CXX_Write(0,(u8*)TEXT_Buffer,SIZE);
+//			printf("write finish\r\n\r\n");
+//			
+//			printf("read start!\r\n");
+//			AT24CXX_Read(0,datatemp,SIZE);
+//			printf("read finish!\r\n\r\n");
+//			
+//			for(i=0;i<30;i++)
+//			{
+//				printf("%c",datatemp[i]);
+//			}
+//			printf("\r\n---------------------\r\n");
+//		}
 }
 
