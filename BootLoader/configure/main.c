@@ -21,6 +21,7 @@ int main(void)
 	
 	  //CAN通信测试
 	  u16 i = 0;
+	  u16 bb[8] = {1,2,3,4,5,6,7,8};
 	  u16 res;
 	  BoardInit();
 	  CAN_Config();
@@ -28,7 +29,7 @@ int main(void)
 	  while(1)
 		{
 			  printf("test %d :  \r\n",++i);
-			  CAN_SetMsg();
+			  CAN_SetMsg(777,bb);
 			  res = HAL_CAN_Transmit_IT(&Can_Handle);
 			  printf("send result: %d \r\n",res);
 			  delay_ms(1000);
@@ -38,7 +39,7 @@ int main(void)
     	      printf("\r\nCAN接收到数据：\r\n");
 					  for(i=0;i<8;i++)
 					  {
-							  printf("%c",Can_Handle.pRxMsg->Data[i]);
+							  printf("%d",Can_Handle.pRxMsg->Data[i]);
 					  }
 						printf("\r\n\r\n");
 			      flag=0;

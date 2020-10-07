@@ -1,14 +1,12 @@
 /**
   ******************************************************************************
-  * @file    Templates/Inc/stm32f4xx_it.h 
+  * @file    ADC/ADC_RegularConversion_DMA/Inc/stm32f4xx_it.h 
   * @author  MCD Application Team
-  * @version V1.3.2
-  * @date    13-November-2015 
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -44,6 +42,8 @@
 #endif 
 
 /* Includes ------------------------------------------------------------------*/
+#include "main.h"
+
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
@@ -58,7 +58,8 @@ void SVC_Handler(void);
 void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
-
+void ADC_IRQHandler(void);
+void ADCx_DMA_IRQHandler(void);
 #ifdef __cplusplus
 }
 #endif

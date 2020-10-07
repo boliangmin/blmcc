@@ -21,11 +21,11 @@ extern CAN_HandleTypeDef Can_Handle;
 
 static void CAN_GPIO_Config(void);
 static void CAN_NVIC_Config(void);
-static void CAN_Mode_Config(void);
+u8 CAN_Mode_Config(void);
 static void CAN_Filter_Config(void);
 void CAN_Config(void);
 
-void CAN_SetMsg(void);
+void CAN_SetMsg(u16 stdId,u16 buff[8]);
 void Init_RxMes(void);
 
 #endif

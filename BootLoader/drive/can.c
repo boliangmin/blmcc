@@ -42,9 +42,8 @@ static void CAN_NVIC_Config(void)
 }
 
 
-static void CAN_Mode_Config(void)
+u8 CAN_Mode_Config(void)
 {
-	
 	/************************CAN通信参数设置**********************************/
 	/* 使能CAN时钟 */
     CAN_CLK_ENABLE();
@@ -56,7 +55,7 @@ static void CAN_Mode_Config(void)
 	  Can_Handle.Init.TTCM=DISABLE;			   //MCR-TTCM  关闭时间触发通信模式使能
 	  Can_Handle.Init.ABOM=ENABLE;			   //MCR-ABOM  自动离线管理 
 	  Can_Handle.Init.AWUM=ENABLE;			   //MCR-AWUM  使用自动唤醒模式
-	  Can_Handle.Init.NART=ENABLE;			   //MCR-NART  禁止报文自动重传	  DISABLE-自动重传
+	  Can_Handle.Init.NART=DISABLE;			   //MCR-NART  禁止报文自动重传	  DISABLE-自动重传
 	  Can_Handle.Init.RFLM=DISABLE;			   //MCR-RFLM  接收FIFO 锁定模式  DISABLE-溢出时新报文会覆盖原有报文  
 	  Can_Handle.Init.TXFP=DISABLE;			   //MCR-TXFP  发送FIFO优先级 DISABLE-优先级取决于报文标示符 
 	  Can_Handle.Init.Mode = CAN_MODE_NORMAL;    //正常工作模式
@@ -68,7 +67,10 @@ static void CAN_Mode_Config(void)
 	
 	  /* CAN Baudrate = 500k Bps (1MBps已为stm32的CAN最高速率) (CAN 时钟频率为 APB1 = 180 / 4 = 45 MHz) */
 	  Can_Handle.Init.Prescaler = 6;		   ////BTR-BRP 波特率分频器  定义了时间单元的时间长度 45/(1+8+6)/6 =500k bps
-	  HAL_CAN_Init(&Can_Handle);
+	  if(HAL_CAN_Init(&Can_Handle) != HAL_OK)
+			  return 1;
+		else
+			  return 0;
 }
 
 
@@ -120,19 +122,19 @@ void Init_RxMes(void)
 }
 
 
-void CAN_SetMsg(void)
-{	  
-    uint8_t ubCounter = 0;
-    Can_Handle.pTxMsg->StdId=0x00;						 
-    Can_Handle.pTxMsg->ExtId=0x1314;					   //使用的扩展ID
-    Can_Handle.pTxMsg->IDE=CAN_ID_EXT;				   //扩展模式
-    Can_Handle.pTxMsg->RTR=CAN_RTR_DATA;				 //发送的是数据
-    Can_Handle.pTxMsg->DLC=8;							       //数据长度为8字节
+void CAN_SetMsg(u16 stdId,u16 buff[8])
+{
+	  u16 i;
+    Can_Handle.pTxMsg->StdId = stdId;						 
+    Can_Handle.pTxMsg->ExtId = 0x1314;					   //使用的扩展ID
+    Can_Handle.pTxMsg->IDE = CAN_ID_EXT;				   //扩展模式
+    Can_Handle.pTxMsg->RTR = CAN_RTR_DATA;				 //发送的是数据
+    Can_Handle.pTxMsg->DLC = 8;							       //数据长度为8字节
 	
     /*设置要发送的数据0-7*/
-    for (ubCounter = 0; ubCounter < 8; ubCounter++)
+    for (i = 0; i < 8; i++)
     {
-        Can_Handle.pTxMsg->Data[ubCounter] = ubCounter;
+        Can_Handle.pTxMsg->Data[i] = buff[i];
     }
 }
 
@@ -157,6 +159,6 @@ void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan)
 void HAL_CAN_ErrorCallback(CAN_HandleTypeDef *hcan)
 {
 	  printf("\r\nCAN出错\r\n");
-} 
+}
 
 
