@@ -368,7 +368,7 @@ typedef struct
 #define CAN_ID_STD             ((uint32_t)0x00000000U)  /*!< Standard Id */
 #define CAN_ID_EXT             ((uint32_t)0x00000004U)  /*!< Extended Id */
 /**
-  * @}	
+  * @}
   */
 
 /** @defgroup CAN_remote_transmission_request CAN Remote Transmission Request

@@ -66,7 +66,7 @@ u8 CAN_Mode_Config(void)
 	  Can_Handle.Init.BS2=CAN_BS2_6TQ;		   //BTR-TS1 时间段2 占用了6个时间单元	
 	
 	  /* CAN Baudrate = 500k Bps (1MBps已为stm32的CAN最高速率) (CAN 时钟频率为 APB1 = 180 / 4 = 45 MHz) */
-	  Can_Handle.Init.Prescaler = 6;		   ////BTR-BRP 波特率分频器  定义了时间单元的时间长度 45/(1+8+6)/6 =500k bps
+	  Can_Handle.Init.Prescaler = 6;		     //BTR-BRP 波特率分频器  定义了时间单元的时间长度 45/(1+8+6)/6 =500k bps
 	  if(HAL_CAN_Init(&Can_Handle) != HAL_OK)
 			  return 1;
 		else
@@ -79,17 +79,18 @@ static void CAN_Filter_Config(void)
 	  CAN_FilterConfTypeDef  CAN_FilterInitStructure;
 
 	  /*CAN筛选器初始化*/
-	  CAN_FilterInitStructure.FilterNumber=0;						//筛选器组0
-	  CAN_FilterInitStructure.FilterMode=CAN_FILTERMODE_IDMASK;	//工作在掩码模式
-	  CAN_FilterInitStructure.FilterScale=CAN_FILTERSCALE_32BIT;	//筛选器位宽为单个32位。
+	  CAN_FilterInitStructure.FilterNumber = 0;						//筛选器组0
+	  CAN_FilterInitStructure.FilterMode = CAN_FILTERMODE_IDMASK;	//工作在掩码模式
+	  CAN_FilterInitStructure.FilterScale = CAN_FILTERSCALE_32BIT;	//筛选器位宽为单个32位。
 	  /* 使能筛选器，按照标志的内容进行比对筛选，扩展ID不是如下的就抛弃掉，是的话，会存入FIFO0。 */
+    //标准帧的起始位置是第22位，需要左移21位
 
-	  CAN_FilterInitStructure.FilterIdHigh= ((((uint32_t)0x1314<<3) | CAN_ID_EXT|CAN_RTR_DATA)&0xFFFF0000)>>16;		//要筛选的ID高位 
-	  CAN_FilterInitStructure.FilterIdLow= (((uint32_t)0x1314<<3) | CAN_ID_EXT|CAN_RTR_DATA)&0xFFFF;              //要筛选的ID低位 
-	  CAN_FilterInitStructure.FilterMaskIdHigh= 0xFFFF;			//筛选器高16位每位必须匹配
-	  CAN_FilterInitStructure.FilterMaskIdLow= 0xFFFF;			//筛选器低16位每位必须匹配
-	  CAN_FilterInitStructure.FilterFIFOAssignment=CAN_FILTER_FIFO0 ;	//筛选器被关联到FIFO0
-	  CAN_FilterInitStructure.FilterActivation=ENABLE;			//使能筛选器
+	  CAN_FilterInitStructure.FilterIdHigh = ((((uint32_t)0x520<<21) | CAN_ID_STD | CAN_RTR_DATA)&0xFFFF0000)>>16;		//要筛选的ID高位 
+	  CAN_FilterInitStructure.FilterIdLow = (((uint32_t)0x520<<21) | CAN_ID_STD | CAN_RTR_DATA)&0xFFFF;              //要筛选的ID低位 
+	  CAN_FilterInitStructure.FilterMaskIdHigh = 0xFFFF;			//筛选器高16位每位必须匹配
+	  CAN_FilterInitStructure.FilterMaskIdLow = 0xFFFF;			//筛选器低16位每位必须匹配
+	  CAN_FilterInitStructure.FilterFIFOAssignment = CAN_FILTER_FIFO0 ;	//筛选器被关联到FIFO0
+	  CAN_FilterInitStructure.FilterActivation = ENABLE;			//使能筛选器
 	  HAL_CAN_ConfigFilter(&Can_Handle,&CAN_FilterInitStructure);
 }
 
@@ -126,8 +127,8 @@ void CAN_SetMsg(u16 stdId,u16 buff[8])
 {
 	  u16 i;
     Can_Handle.pTxMsg->StdId = stdId;						 
-    Can_Handle.pTxMsg->ExtId = 0x1314;					   //使用的扩展ID
-    Can_Handle.pTxMsg->IDE = CAN_ID_EXT;				   //扩展模式
+    Can_Handle.pTxMsg->ExtId = 0x00;					     //使用的扩展ID
+    Can_Handle.pTxMsg->IDE = CAN_ID_STD;				   //扩展模式
     Can_Handle.pTxMsg->RTR = CAN_RTR_DATA;				 //发送的是数据
     Can_Handle.pTxMsg->DLC = 8;							       //数据长度为8字节
 	
@@ -141,8 +142,8 @@ void CAN_SetMsg(u16 stdId,u16 buff[8])
 
 void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan)
 {
-	  /* 比较ID是否为0x1314 */ 
-	  if((hcan->pRxMsg->ExtId==0x1314) && (hcan->pRxMsg->IDE==CAN_ID_EXT) && (hcan->pRxMsg->DLC==8) )
+	  /* 比较ID是否为0x520 */ 
+	  if((hcan->pRxMsg->StdId == 0x520) && (hcan->pRxMsg->IDE == CAN_ID_STD) && (hcan->pRxMsg->DLC==8) )
 	  {
 		    flag = 1; //接收成功  
 	  }

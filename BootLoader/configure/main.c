@@ -3,6 +3,7 @@
 #include "delay.h"
 #include "can.h"
 #include "eeprom.h"
+#include "recvhandle.h"
 
 __IO uint32_t flag = 0;		 //用于标志是否接收到数据，在中断函数中赋值
 
@@ -20,31 +21,11 @@ int main(void)
 	
 	
 	  //CAN通信测试
-	  u16 i = 0;
-	  u16 bb[8] = {1,2,3,4,5,6,7,8};
-	  u16 res;
 	  BoardInit();
 	  CAN_Config();
-	  printf("CAN test demo ,start!\r\n");
 	  while(1)
 		{
-			  printf("test %d :  \r\n",++i);
-			  CAN_SetMsg(777,bb);
-			  res = HAL_CAN_Transmit_IT(&Can_Handle);
-			  printf("send result: %d \r\n",res);
-			  delay_ms(1000);
-			  printf("已使用CAN发送数据包！\r\n\r\n");
-				if(flag==1)
-		    {
-    	      printf("\r\nCAN接收到数据：\r\n");
-					  for(i=0;i<8;i++)
-					  {
-							  printf("%d",Can_Handle.pRxMsg->Data[i]);
-					  }
-						printf("\r\n\r\n");
-			      flag=0;
-			      HAL_Delay(100);
-		    }
+			  CanRecvService();
 		}
 
 //		//EEPROM读写测试
