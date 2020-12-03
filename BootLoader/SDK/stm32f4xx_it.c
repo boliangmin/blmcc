@@ -39,6 +39,7 @@
 #include "main.h"
 #include "stm32f4xx_it.h"
 #include "can.h"
+#include "IR_NEC.h"
 /** @addtogroup STM32F7xx_HAL_Examples
   * @{
   */
@@ -181,6 +182,7 @@ void CAN1_TX_IRQHandler(void)
 {
 	HAL_CAN_IRQHandler(&Can_Handle);
 }
+
 /**
   * @}
   */ 

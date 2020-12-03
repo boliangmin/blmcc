@@ -74,3 +74,4 @@
 ..\obj\stm32f4xx_it.o: ..\include\sdk\stm32f4xx_it.h
 ..\obj\stm32f4xx_it.o: ..\include\drive\can.h
 ..\obj\stm32f4xx_it.o: ..\include\drive\sys.h
+..\obj\stm32f4xx_it.o: ..\include\drive\IR_NEC.h

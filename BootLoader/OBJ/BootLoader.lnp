@@ -16,6 +16,7 @@
 "..\obj\sdram.o"
 "..\obj\sys.o"
 "..\obj\usart.o"
+"..\obj\ir_nec.o"
 "..\obj\stm32f4xx_hal.o"
 "..\obj\stm32f4xx_hal_can.o"
 "..\obj\stm32f4xx_hal_cortex.o"

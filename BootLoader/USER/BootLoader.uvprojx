@@ -465,6 +465,11 @@
               <FileType>1</FileType>
               <FilePath>..\drive\usart.c</FilePath>
             </File>
+            <File>
+              <FileName>IR_NEC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\drive\IR_NEC.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

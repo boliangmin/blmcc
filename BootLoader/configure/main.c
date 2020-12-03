@@ -4,8 +4,10 @@
 #include "can.h"
 #include "eeprom.h"
 #include "recvhandle.h"
+#include "IR_NEC.h"
 
 __IO uint32_t flag = 0;		 //用于标志是否接收到数据，在中断函数中赋值
+
 
 int main(void)
 {
@@ -20,14 +22,22 @@ int main(void)
 //	  }
 	
 	
-	  //CAN通信测试
-	  BoardInit();
-	  CAN_Config();
-	  while(1)
-		{
-			  CanRecvService();
-		}
-
+//	  //CAN通信测试
+//	  BoardInit();
+//	  CAN_Config();
+//	  while(1)
+//		{
+//			  CanRecvService();
+//		}
+		
+			//NEC发送测试
+			BoardInit();
+			NEC_GPIO_Config();	
+			TiMer_Init();
+			while(1)
+			{
+					
+			}
 //		//EEPROM读写测试
 //		#define SIZE sizeof(TEXT_Buffer)
 //		const u8 TEXT_Buffer[]={"blmcc eeprom test"};

@@ -58,7 +58,9 @@ u8 CAN_Mode_Config(void)
 	  Can_Handle.Init.NART=DISABLE;			   //MCR-NART  禁止报文自动重传	  DISABLE-自动重传
 	  Can_Handle.Init.RFLM=DISABLE;			   //MCR-RFLM  接收FIFO 锁定模式  DISABLE-溢出时新报文会覆盖原有报文  
 	  Can_Handle.Init.TXFP=DISABLE;			   //MCR-TXFP  发送FIFO优先级 DISABLE-优先级取决于报文标示符 
-	  Can_Handle.Init.Mode = CAN_MODE_NORMAL;    //正常工作模式
+	  //Can_Handle.Init.Mode = CAN_MODE_NORMAL;    //正常工作模式
+	  Can_Handle.Init.Mode = CAN_MODE_LOOPBACK;    //正常工作模式
+	
 	  Can_Handle.Init.SJW=CAN_SJW_1TQ;		   //BTR-SJW 重新同步跳跃宽度 2个时间单元
 	 
 	  /* ss=1 bs1=8 bs2=6 位时间宽度为(1+8+6) 波特率即为时钟周期tq*(1+8+6)  */
