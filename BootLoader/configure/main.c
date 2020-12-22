@@ -22,22 +22,33 @@ int main(void)
 //	  }
 	
 	
-//	  //CANÕ®–≈≤‚ ‘
-//	  BoardInit();
-//	  CAN_Config();
-//	  while(1)
-//		{
-//			  CanRecvService();
-//		}
-		
-			//NEC∑¢ÀÕ≤‚ ‘
-			BoardInit();
-			NEC_GPIO_Config();	
-			TiMer_Init();
-			while(1)
-			{
-					
-			}
+	  //CANÕ®–≈≤‚ ‘
+//		u8 tempData[8] = {0};
+//		tempData[0] = 0x07U;
+//		tempData[1] = 0x01U;
+//		tempData[2] = 0x02U;
+//		tempData[3] = 0x03U;
+//		tempData[4] = 0x04U;
+//		tempData[5] = 0x05U;
+//		tempData[6] = 0x06U;
+//		tempData[7] = 0x07U;
+	  BoardInit();
+	  CAN_Config();
+	  while(1)
+		{
+			  CanRecvService();
+//				delay_ms(500);
+//				SendPositiveResponse(tempData);
+		}
+
+//			//NEC∑¢ÀÕ≤‚ ‘
+//			BoardInit();
+//			NEC_GPIO_Config();	
+//			TiMer_Init();
+//			while(1)
+//			{
+//					
+//			}
 //		//EEPROM∂¡–¥≤‚ ‘
 //		#define SIZE sizeof(TEXT_Buffer)
 //		const u8 TEXT_Buffer[]={"blmcc eeprom test"};

@@ -3,73 +3,117 @@
 #include "sys.h"
 #include "delay.h"
 #include "usart.h"
+#include "diag_service.h"
 
 extern __IO uint32_t flag ;
 extern CAN_HandleTypeDef Can_Handle;
 
-void CanRecvService(void)
-{
-	  u16 i;
-	  u16 tempdData[8] = {0};
-	  if(flag==1)
-		{
-        printf("CAN接收到数据：\r\n");
-				for(i=0;i<8;i++)
-				{
-				    printf("%d\t",Can_Handle.pRxMsg->Data[i]);
-				}
-				printf("\r\n");
-				
-				tempdData[0] = 0x03U;
-				tempdData[1] = TEST_RESPONSE;
-				tempdData[2] = 0x55U;
-				tempdData[3] = 0x55U;
-				tempdData[4] = 0x55U;
-				tempdData[5] = 0x55U;
-				tempdData[6] = 0x55U;
-				tempdData[7] = 0x55U;
-				SendPositiveResponse(tempdData);
+u8 	DiagData[TEMP_DATA_MAX] = {0};
+u16 DiagDataLen = 0;
 
-			  flag=0;
-				tempdData[0] = 0x01U;
-				tempdData[1] = TEST_RESPONSE;
-				tempdData[2] = 0x55U;
-				tempdData[3] = 0x55U;
-				tempdData[4] = 0x55U;
-				tempdData[5] = 0x55U;
-				tempdData[6] = 0x55U;
-				tempdData[7] = 0x55U;
-				SendNagetiveResponse(tempdData);
-			  HAL_Delay(100);
-		}
-		else
+
+void DiagService(u8 *DiagData)
+{
+		u8 tempData[8] = {0};
+    switch(DiagData[0])
 		{
-			  printf("CAN发送信息:\r\n\r\n");
-			  tempdData[0] = 0x00U;
-		    tempdData[1] = 0x01U;
-		  	tempdData[2] = 0x02U;
-			  tempdData[3] = 0x03U;
-			  tempdData[4] = 0x04U;
-			  tempdData[5] = 0x05U;
-			  tempdData[6] = 0x06U;
-			  tempdData[7] = 0x07U;
-		    CAN_SetMsg(0x315,tempdData);
-			  HAL_CAN_Transmit_IT(&Can_Handle);
-	      HAL_Delay(1000);
+			case READ_MASSAGE:
+					break;
+			case SECURITY_ACCESS:
+					if(DiagData[1] == SECURITY_ACCESS_REQ)
+					{
+							tempData[0] = 0x05U;
+							tempData[1] = SECURITY_ACCESS;
+							tempData[2] = SECURITY_ACCESS_REQ;
+							tempData[3] = POSITIVE_RESPOND;
+							tempData[4] = (SECURITY_ACCESS_BOOT >> 8) & 0xff;
+							tempData[5] = SECURITY_ACCESS_BOOT & 0xff;
+							tempData[6] = 0xff;
+							tempData[7] = 0xff;
+							SendPositiveResponse(tempData);
+					}
+					else if(DiagData[1] == SECURITY_ACCESS_KEY)
+					{
+							tempData[0] = 0x04U;
+							tempData[1] = SECURITY_ACCESS;
+							tempData[2] = SECURITY_ACCESS_KEY;
+							tempData[3] = POSITIVE_RESPOND;
+							tempData[4] = SECURITY_KEY_RIGHT;
+							tempData[5] = 0xff;
+							tempData[6] = 0xff;
+							tempData[7] = 0xff;
+							SendPositiveResponse(tempData);
+					}
+					break;
+			case ERASE_REQUEST:
+					break;
+			case REQ_DOWNLOAD:
+					break;
+			case DATA_TRANS:
+					break;
+			case QUIT_TRANS:
+					break;
+			case CHECK_SUM:
+					break;
+			case WRITE_MASSAGE:
+					break;
+			case MCU_RESET:
+					break;
 		}
 }
 
 
-void SendPositiveResponse(u16 buff[])
+
+void CAN_Frame_prase(u8 *ReqData)
 {
-    CAN_SetMsg(POSITIVE_RESPONSE,buff);
+    u16 ReqDataIdx = 0;
+//    u16 tempIdx = 0;
+	  u16 i = 0;
+//    u8 	RespData[8] = {0};
+	
+    switch(ReqData[0] & 0xf0)
+    {
+        case NORMAL_FRAME:
+            DiagDataLen = ReqData[0] & 0x0f;
+						for(i=0;i<DiagDataLen;i++)
+						{
+						    DiagData[ReqDataIdx] = ReqData[i+1];
+								ReqDataIdx++;
+						}
+						DiagService(DiagData);
+						DiagDataLen = 0;               //请求数据下标和数据长度清零，为下次接收做准备
+						ReqDataIdx = 0;
+						break;
+        case REQUEST_FRAME:
+						break;
+        case LONGDATA_FRAME:
+						break;
+        case REQ_LONG_FRAME:
+						break;
+    }
+}
+
+
+void CanRecvService(void)
+{
+		if(flag ==1)
+		{
+				CAN_Frame_prase(Can_Handle.pRxMsg->Data);
+				flag = 0;
+		}
+}
+
+
+void SendPositiveResponse(u8 *buff)
+{
+    CAN_SetMsg(SEND_ID,buff);
 	  HAL_CAN_Transmit_IT(&Can_Handle);
 	  HAL_Delay(100);
 }
 
-void SendNagetiveResponse(u16 buff[])
+void SendNagetiveResponse(u8 buff[])
 {
-	  CAN_SetMsg(NEGATIVE_RESPONSE,buff);
+	  CAN_SetMsg(SEND_ID,buff);
 	  HAL_CAN_Transmit_IT(&Can_Handle);
 	  HAL_Delay(100);
 }

@@ -571,6 +571,11 @@
               <FilePath>..\include\sdk\core_cmSimd.h</FilePath>
             </File>
             <File>
+              <FileName>diag_service.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\include\drive\diag_service.h</FilePath>
+            </File>
+            <File>
               <FileName>main.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\include\sdk\main.h</FilePath>
@@ -986,11 +991,6 @@
               <FilePath>..\SDK\stm32f4xx_hal_dma_ex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_ll_fmc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SDK\stm32f4xx_ll_fmc.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_hal_gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SDK\stm32f4xx_hal_gpio.c</FilePath>
@@ -1059,6 +1059,11 @@
               <FileName>stm32f4xx_hal_usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SDK\stm32f4xx_hal_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_fmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SDK\stm32f4xx_ll_fmc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_it.c</FileName>

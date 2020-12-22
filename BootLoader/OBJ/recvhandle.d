@@ -75,3 +75,4 @@
 ..\obj\recvhandle.o: ..\include\drive\can.h
 ..\obj\recvhandle.o: ..\include\drive\delay.h
 ..\obj\recvhandle.o: ..\include\drive\usart.h
+..\obj\recvhandle.o: ..\include\drive\diag_service.h

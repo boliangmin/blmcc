@@ -58,14 +58,14 @@ u8 CAN_Mode_Config(void)
 	  Can_Handle.Init.NART=DISABLE;			   //MCR-NART  禁止报文自动重传	  DISABLE-自动重传
 	  Can_Handle.Init.RFLM=DISABLE;			   //MCR-RFLM  接收FIFO 锁定模式  DISABLE-溢出时新报文会覆盖原有报文  
 	  Can_Handle.Init.TXFP=DISABLE;			   //MCR-TXFP  发送FIFO优先级 DISABLE-优先级取决于报文标示符 
-	  //Can_Handle.Init.Mode = CAN_MODE_NORMAL;    //正常工作模式
-	  Can_Handle.Init.Mode = CAN_MODE_LOOPBACK;    //正常工作模式
+	  Can_Handle.Init.Mode = CAN_MODE_NORMAL;    //正常工作模式
+	  //Can_Handle.Init.Mode = CAN_MODE_LOOPBACK;    //正常工作模式
 	
 	  Can_Handle.Init.SJW=CAN_SJW_1TQ;		   //BTR-SJW 重新同步跳跃宽度 2个时间单元
 	 
 	  /* ss=1 bs1=8 bs2=6 位时间宽度为(1+8+6) 波特率即为时钟周期tq*(1+8+6)  */
 	  Can_Handle.Init.BS1=CAN_BS1_8TQ;		   //BTR-TS1 时间段1 占用了8个时间单元
-	  Can_Handle.Init.BS2=CAN_BS2_6TQ;		   //BTR-TS1 时间段2 占用了6个时间单元	
+	  Can_Handle.Init.BS2=CAN_BS2_6TQ;		   //BTR-TS1 时间段2 占用了6个时间单元
 	
 	  /* CAN Baudrate = 500k Bps (1MBps已为stm32的CAN最高速率) (CAN 时钟频率为 APB1 = 180 / 4 = 45 MHz) */
 	  Can_Handle.Init.Prescaler = 6;		     //BTR-BRP 波特率分频器  定义了时间单元的时间长度 45/(1+8+6)/6 =500k bps
@@ -125,7 +125,7 @@ void Init_RxMes(void)
 }
 
 
-void CAN_SetMsg(u16 stdId,u16 buff[8])
+void CAN_SetMsg(u16 stdId,u8 *buff)
 {
 	  u16 i;
     Can_Handle.pTxMsg->StdId = stdId;						 
