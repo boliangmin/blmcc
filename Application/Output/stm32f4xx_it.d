@@ -72,6 +72,3 @@
 ..\output\stm32f4xx_it.o: ..\Libraries\inc\stm32f4xx_hal_pcd_ex.h
 ..\output\stm32f4xx_it.o: ..\Libraries\inc\stm32f4xx_hal_hcd.h
 ..\output\stm32f4xx_it.o: ..\Libraries\inc\stm32f4xx_it.h
-..\output\stm32f4xx_it.o: ..\include\can.h
-..\output\stm32f4xx_it.o: ..\include\sys.h
-..\output\stm32f4xx_it.o: ..\include\IR_NEC.h

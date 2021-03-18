@@ -1,6 +1,5 @@
 ..\output\delay.o: ..\Sources\Devices\delay.c
 ..\output\delay.o: ..\include\delay.h
-..\output\delay.o: ..\include\sys.h
 ..\output\delay.o: ..\Libraries\inc\stm32f4xx.h
 ..\output\delay.o: ..\Libraries\inc\stm32f429xx.h
 ..\output\delay.o: ..\Libraries\inc\core_cm4.h

@@ -1,6 +1,5 @@
 ..\output\rtc.o: ..\Sources\Devices\rtc.c
 ..\output\rtc.o: ..\include\rtc.h
-..\output\rtc.o: ..\include\sys.h
 ..\output\rtc.o: ..\Libraries\inc\stm32f4xx.h
 ..\output\rtc.o: ..\Libraries\inc\stm32f429xx.h
 ..\output\rtc.o: ..\Libraries\inc\core_cm4.h
@@ -73,4 +72,3 @@
 ..\output\rtc.o: ..\Libraries\inc\stm32f4xx_hal_pcd_ex.h
 ..\output\rtc.o: ..\Libraries\inc\stm32f4xx_hal_hcd.h
 ..\output\rtc.o: ..\include\delay.h
-..\output\rtc.o: ..\include\led.h

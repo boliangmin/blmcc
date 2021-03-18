@@ -1,6 +1,5 @@
 ..\output\recvhandle.o: ..\Sources\Diagnosis\recvhandle.c
 ..\output\recvhandle.o: ..\include\recvhandle.h
-..\output\recvhandle.o: ..\include\sys.h
 ..\output\recvhandle.o: ..\Libraries\inc\stm32f4xx.h
 ..\output\recvhandle.o: ..\Libraries\inc\stm32f429xx.h
 ..\output\recvhandle.o: ..\Libraries\inc\core_cm4.h
@@ -72,6 +71,5 @@
 ..\output\recvhandle.o: ..\Libraries\inc\stm32f4xx_ll_usb.h
 ..\output\recvhandle.o: ..\Libraries\inc\stm32f4xx_hal_pcd_ex.h
 ..\output\recvhandle.o: ..\Libraries\inc\stm32f4xx_hal_hcd.h
-..\output\recvhandle.o: ..\include\can.h
+..\output\recvhandle.o: ..\include\dev_can.h
 ..\output\recvhandle.o: ..\include\delay.h
-..\output\recvhandle.o: ..\include\usart.h

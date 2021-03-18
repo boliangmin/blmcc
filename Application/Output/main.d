@@ -1,5 +1,5 @@
 ..\output\main.o: ..\Sources\User\main.c
-..\output\main.o: ..\include\sys.h
+..\output\main.o: ..\include\board_init.h
 ..\output\main.o: ..\Libraries\inc\stm32f4xx.h
 ..\output\main.o: ..\Libraries\inc\stm32f429xx.h
 ..\output\main.o: ..\Libraries\inc\core_cm4.h
@@ -71,11 +71,6 @@
 ..\output\main.o: ..\Libraries\inc\stm32f4xx_ll_usb.h
 ..\output\main.o: ..\Libraries\inc\stm32f4xx_hal_pcd_ex.h
 ..\output\main.o: ..\Libraries\inc\stm32f4xx_hal_hcd.h
-..\output\main.o: ..\include\configure.h
+..\output\main.o: ..\include\dev_oled.h
+..\output\main.o: ..\include\dev_I2C.h
 ..\output\main.o: ..\include\delay.h
-..\output\main.o: ..\include\can.h
-..\output\main.o: ..\include\eeprom.h
-..\output\main.o: ..\include\myiic.h
-..\output\main.o: ..\include\recvhandle.h
-..\output\main.o: ..\include\IR_NEC.h
-..\output\main.o: ..\include\led.h

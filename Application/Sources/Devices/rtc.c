@@ -1,18 +1,5 @@
 #include "rtc.h"
 #include "delay.h"
-#include "led.h"
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK STM32F429开发板
-//RTC驱动代码	   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//创建日期:2016/1/13
-//版本：V1.0
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2014-2024
-//All rights reserved									  
-////////////////////////////////////////////////////////////////////////////////// 	
 
 RTC_HandleTypeDef RTC_Handler;  //RTC句柄
 
@@ -21,7 +8,7 @@ RTC_HandleTypeDef RTC_Handler;  //RTC句柄
 //ampm:@RTC_AM_PM_Definitions:RTC_HOURFORMAT12_AM/RTC_HOURFORMAT12_PM
 //返回值:SUCEE(1),成功
 //       ERROR(0),进入初始化模式失败 
-HAL_StatusTypeDef RTC_Set_Time(u8 hour,u8 min,u8 sec,u8 ampm)
+HAL_StatusTypeDef RTC_Set_Time(uint8_t hour,uint8_t min,uint8_t sec,uint8_t ampm)
 {
 	RTC_TimeTypeDef RTC_TimeStructure;
 	
@@ -39,7 +26,7 @@ HAL_StatusTypeDef RTC_Set_Time(u8 hour,u8 min,u8 sec,u8 ampm)
 //week:星期(1~7,0,非法!)
 //返回值:SUCEE(1),成功
 //       ERROR(0),进入初始化模式失败 
-HAL_StatusTypeDef RTC_Set_Date(u8 year,u8 month,u8 date,u8 week)
+HAL_StatusTypeDef RTC_Set_Date(uint8_t year,uint8_t month,uint8_t date,uint8_t week)
 {
 	RTC_DateTypeDef RTC_DateStructure;
     
@@ -53,7 +40,7 @@ HAL_StatusTypeDef RTC_Set_Date(u8 year,u8 month,u8 date,u8 week)
 //RTC初始化
 //返回值:0,初始化成功;
 //       2,进入初始化模式失败;
-u8 RTC_Init(void)
+uint8_t RTC_Init(void)
 {      
 
 	
@@ -101,7 +88,7 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef* hrtc)
 //设置闹钟时间(按星期闹铃,24小时制)
 //week:星期几(1~7) @ref  RTC_WeekDay_Definitions
 //hour,min,sec:小时,分钟,秒钟
-void RTC_Set_AlarmA(u8 week,u8 hour,u8 min,u8 sec)
+void RTC_Set_AlarmA(uint8_t week,uint8_t hour,uint8_t min,uint8_t sec)
 { 
     RTC_AlarmTypeDef RTC_AlarmSturuct;
     
@@ -132,7 +119,7 @@ void RTC_Set_AlarmA(u8 week,u8 hour,u8 min,u8 sec)
 #define RTC_WAKEUPCLOCK_CK_SPRE_17BITS      ((uint32_t)0x00000006)
 */
 //cnt:自动重装载值.减到0,产生中断.
-void RTC_Set_WakeUp(u32 wksel,u16 cnt)
+void RTC_Set_WakeUp(uint32_t wksel,uint16_t cnt)
 { 
     __HAL_RTC_WAKEUPTIMER_CLEAR_FLAG(&RTC_Handler, RTC_FLAG_WUTF);//清除RTC WAKE UP的标志
 	
@@ -163,6 +150,6 @@ void RTC_WKUP_IRQHandler(void)
 //RTC WAKE UP中断处理
 void HAL_RTCEx_WakeUpTimerEventCallback(RTC_HandleTypeDef *hrtc)
 {
-    LED1=!LED1;
+    //LED1=!LED1;
 }
 

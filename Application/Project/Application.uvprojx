@@ -51,7 +51,7 @@
           <OutputName>Application</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>0</CreateHexFile>
+          <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
           <ListingPath>..\Output\</ListingPath>
@@ -706,14 +706,14 @@
           <GroupName>include</GroupName>
           <Files>
             <File>
-              <FileName>can.h</FileName>
+              <FileName>board_init.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\include\can.h</FilePath>
+              <FilePath>..\include\board_init.h</FilePath>
             </File>
             <File>
-              <FileName>configure.h</FileName>
+              <FileName>dev_I2C.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\include\configure.h</FilePath>
+              <FilePath>..\include\dev_I2C.h</FilePath>
             </File>
             <File>
               <FileName>delay.h</FileName>
@@ -721,49 +721,19 @@
               <FilePath>..\include\delay.h</FilePath>
             </File>
             <File>
-              <FileName>eeprom.h</FileName>
+              <FileName>dev_oled.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\include\eeprom.h</FilePath>
+              <FilePath>..\include\dev_oled.h</FilePath>
             </File>
             <File>
-              <FileName>font.h</FileName>
+              <FileName>power_manage.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\include\font.h</FilePath>
+              <FilePath>..\include\power_manage.h</FilePath>
             </File>
             <File>
-              <FileName>IR_NEC.h</FileName>
+              <FileName>dev_can.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\include\IR_NEC.h</FilePath>
-            </File>
-            <File>
-              <FileName>key.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\include\key.h</FilePath>
-            </File>
-            <File>
-              <FileName>lcd.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\include\lcd.h</FilePath>
-            </File>
-            <File>
-              <FileName>led.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\include\led.h</FilePath>
-            </File>
-            <File>
-              <FileName>ltdc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\include\ltdc.h</FilePath>
-            </File>
-            <File>
-              <FileName>myiic.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\include\myiic.h</FilePath>
-            </File>
-            <File>
-              <FileName>pcf8574.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\include\pcf8574.h</FilePath>
+              <FilePath>..\include\dev_can.h</FilePath>
             </File>
             <File>
               <FileName>recvhandle.h</FileName>
@@ -771,29 +741,9 @@
               <FilePath>..\include\recvhandle.h</FilePath>
             </File>
             <File>
-              <FileName>rs485.h</FileName>
+              <FileName>dev_usart.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\include\rs485.h</FilePath>
-            </File>
-            <File>
-              <FileName>rtc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\include\rtc.h</FilePath>
-            </File>
-            <File>
-              <FileName>sdram.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\include\sdram.h</FilePath>
-            </File>
-            <File>
-              <FileName>sys.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\include\sys.h</FilePath>
-            </File>
-            <File>
-              <FileName>usart.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\include\usart.h</FilePath>
+              <FilePath>..\include\dev_usart.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -801,14 +751,14 @@
           <GroupName>devices</GroupName>
           <Files>
             <File>
-              <FileName>can.c</FileName>
+              <FileName>board_init.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Sources\Devices\can.c</FilePath>
+              <FilePath>..\Sources\Devices\board_init.c</FilePath>
             </File>
             <File>
-              <FileName>configure.c</FileName>
+              <FileName>dev_I2C.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Sources\Devices\configure.c</FilePath>
+              <FilePath>..\Sources\Devices\dev_I2C.c</FilePath>
             </File>
             <File>
               <FileName>delay.c</FileName>
@@ -816,49 +766,14 @@
               <FilePath>..\Sources\Devices\delay.c</FilePath>
             </File>
             <File>
-              <FileName>eeprom.c</FileName>
+              <FileName>dev_oled.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Sources\Devices\eeprom.c</FilePath>
+              <FilePath>..\Sources\Devices\dev_oled.c</FilePath>
             </File>
             <File>
-              <FileName>IR_NEC.c</FileName>
+              <FileName>power_manage.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Sources\Devices\IR_NEC.c</FilePath>
-            </File>
-            <File>
-              <FileName>key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Sources\Devices\key.c</FilePath>
-            </File>
-            <File>
-              <FileName>lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Sources\Devices\lcd.c</FilePath>
-            </File>
-            <File>
-              <FileName>led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Sources\Devices\led.c</FilePath>
-            </File>
-            <File>
-              <FileName>ltdc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Sources\Devices\ltdc.c</FilePath>
-            </File>
-            <File>
-              <FileName>myiic.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Sources\Devices\myiic.c</FilePath>
-            </File>
-            <File>
-              <FileName>pcf8574.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Sources\Devices\pcf8574.c</FilePath>
-            </File>
-            <File>
-              <FileName>rs485.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Sources\Devices\rs485.c</FilePath>
+              <FilePath>..\Sources\Devices\power_manage.c</FilePath>
             </File>
             <File>
               <FileName>rtc.c</FileName>
@@ -866,19 +781,14 @@
               <FilePath>..\Sources\Devices\rtc.c</FilePath>
             </File>
             <File>
-              <FileName>sdram.c</FileName>
+              <FileName>dev_can.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Sources\Devices\sdram.c</FilePath>
+              <FilePath>..\Sources\Devices\dev_can.c</FilePath>
             </File>
             <File>
-              <FileName>sys.c</FileName>
+              <FileName>dev_usart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Sources\Devices\sys.c</FilePath>
-            </File>
-            <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Sources\Devices\usart.c</FilePath>
+              <FilePath>..\Sources\Devices\dev_usart.c</FilePath>
             </File>
           </Files>
         </Group>

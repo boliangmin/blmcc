@@ -1,48 +1,21 @@
-#include "sys.h"
-#include "configure.h"
+#include "board_init.h"
+#include "dev_oled.h"
 #include "delay.h"
-#include "can.h"
-#include "eeprom.h"
-#include "recvhandle.h"
-#include "IR_NEC.h"
-#include "led.h"
 
-__IO uint32_t flag = 0;		 //用于标志是否接收到数据，在中断函数中赋值
-unsigned char wake_flag = 0;
+__IO uint32_t can_rx_flag = 0;		 //用于标志是否接收到数据，在中断函数中赋值
+//unsigned char wake_flag = 0;
 
 
-void WKUP_Init(void)
-{
-	GPIO_InitTypeDef GPIO_Initure;
-	__HAL_RCC_GPIOH_CLK_ENABLE();			  //开启GPIOA时钟
-	
-	GPIO_Initure.Pin = GPIO_PIN_2;             //PA0
-	GPIO_Initure.Mode = GPIO_MODE_IT_FALLING;  //中断,上升沿
-	GPIO_Initure.Pull = GPIO_PULLUP;           //下拉
-	HAL_GPIO_Init(GPIOH,&GPIO_Initure);
-	
-	HAL_NVIC_SetPriority(EXTI2_IRQn,2,0);
-	HAL_NVIC_EnableIRQ(EXTI2_IRQn);
-}
-
-void EXTI2_IRQHandler(void)
-{
-    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);//调用中断处理公用函数
-}
-
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-    delay_ms(100);      //消抖
-	
-	if(GPIO_PIN_2)
-	{
-		wake_flag = !wake_flag;
-	}
-}
 
 
 int main(void)
 {
+	SystemClock_Config();
+	delay_init(180);
+
+	OLED_Init();
+	OLED_CLS();
+
 //	  //串口通讯测试代码
 //	  u16 i= 0;
 //	  BoardInit();
@@ -64,7 +37,7 @@ int main(void)
 
 
 //			//NEC发送测试
-			BoardInit();
+//			BoardInit();
 //			NEC_GPIO_Config();	
 //			TiMer_Init();
 //			while(1)
@@ -107,21 +80,28 @@ int main(void)
 //			printf("\r\n---------------------\r\n");
 //		}
 
-	LED_Init();
-    WKUP_Init();	                //待机唤醒初始化
+//	LED_Init();
+//    WKUP_Init();	                //待机唤醒初始化
 
 	while(1)
 	{
-		if(wake_flag == 1)
-		{
-			delay_ms(2000);
-			if(wake_flag == 1)
-			{
-				Sys_Enter_Standby();
-			}
-		}
-		LED0 = !LED0;
-		delay_ms(500);              //延时250ms
+		OLED_ShowStr(0,0,"blm",1);
+		OLED_ShowStr(0,1,"0123456789",1);
+		OLED_ShowStr(0,2,"come on!",1);
+		delay_ms(10000);
+		OLED_CLS();
+		delay_ms(1000);
+		
+//		if(wake_flag == 1)
+//		{
+//			delay_ms(2000);
+//			if(wake_flag == 1)
+//			{
+//				Sys_Enter_Standby();
+//			}
+//		}
+//		LED0 = !LED0;
+//		delay_ms(500);              //延时250ms
 	}
 }
 

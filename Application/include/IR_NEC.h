@@ -1,6 +1,5 @@
 #ifndef __IR_NEC_H
 #define __IR_NEC_H
-#include "sys.h"
 
 
 
